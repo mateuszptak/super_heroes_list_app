@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "977210487153",
+    "project_id": "super-hero-301",
+    "storage_bucket": "super-hero-301.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977210487153:android:94763501dd40dc66aac6d0",
+        "android_client_info": {
+          "package_name": "com.mateuszptak.super_heroes_list_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977210487153-jijrs8gacqk7rtr581l09b9f1d7mkioh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARU4Fz5-MFNamjXm6dD65FYIhFYue90zE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977210487153-jijrs8gacqk7rtr581l09b9f1d7mkioh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

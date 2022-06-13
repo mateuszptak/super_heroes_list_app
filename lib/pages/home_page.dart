@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: SafeArea(
-        child: ListView(
+        child: Column(
           children: [
             Align(
               alignment: Alignment.center,
@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const SuperHeroModel(
+           const SuperHeroModel(
               realName: 'Bruce Vayne',
               nickName: 'Batman',
               avatarImage:

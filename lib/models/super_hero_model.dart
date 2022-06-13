@@ -52,9 +52,10 @@ class SuperHeroModel extends StatelessWidget {
                 backgroundImage: NetworkImage(avatarImage),
               ),
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-              child: Text(quote,
+              child: Text(
+                quote,
                 maxLines: 3,
                 textAlign: TextAlign.center,
                 style: const TextStyle(

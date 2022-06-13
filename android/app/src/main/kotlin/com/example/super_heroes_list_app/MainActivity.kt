@@ -1,4 +1,4 @@
-package com.example.super_heroes_list_app
+package com.mateuszptak.super_heroes_list_app
 
 import io.flutter.embedding.android.FlutterActivity
 

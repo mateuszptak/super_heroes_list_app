@@ -8,7 +8,7 @@
 PRODUCT_NAME = super_heroes_list_app
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.superHeroesListApp
+PRODUCT_BUNDLE_IDENTIFIER = com.mateuszptak.superHeroesListApp
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 com.mateuszptak. All rights reserved.
