@@ -4,7 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 class AddHeroButton extends StatelessWidget {
   const AddHeroButton({
     Key? key,
+    required this.text,
+    required this.onPressed,
   }) : super(key: key);
+
+  final String text;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +21,20 @@ class AddHeroButton extends StatelessWidget {
         right: 20,
       ),
       child: InkWell(
+        onTap: onPressed,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: const Color.fromARGB(255, 113, 7, 85),
-              width: 5,
+              width: 3,
             ),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Center(
               child: Text(
-                'Add Super Hero!',
+                text,
                 style: GoogleFonts.abrilFatface(
                   fontSize: 40,
                   color: const Color.fromARGB(255, 113, 7, 85),
@@ -37,7 +43,6 @@ class AddHeroButton extends StatelessWidget {
             ),
           ),
         ),
-        onTap: () {},
       ),
     );
   }

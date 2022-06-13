@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../models/super_hero_model.dart';
 import '../widgets/add_hero_button.dart';
+import 'add_hero_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,8 +35,10 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream:
-                  FirebaseFirestore.instance.collection('heroes').snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection('heroes')
+                  .orderBy('nick_name')
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
@@ -62,7 +65,16 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            const AddHeroButton(),
+            AddHeroButton(
+              text: 'Add Super Hero!',
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AddHeroPage(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
