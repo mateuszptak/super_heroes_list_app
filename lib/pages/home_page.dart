@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,14 +28,28 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-           const SuperHeroModel(
-              realName: 'Bruce Vayne',
-              nickName: 'Batman',
-              avatarImage:
-                  'https://i1.sndcdn.com/avatars-000304411295-zx2krs-t500x500.jpg',
-              quote:
-                  'It\'s not who I am underneath, but what I do that defines me.',
-            ),
+            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                stream:
+                    FirebaseFirestore.instance.collection('heroes').snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  final documents = snapshot.data!.docs;
+
+                  return SuperHeroModel(
+                    realName: (documents[0]['real_name']),
+                    nickName: (documents[0]['nick_name']),
+                    avatarImage: (documents[0]['avatar_image']),
+                    quote: (documents[0]['quote']),
+                  );
+                }),
             const AddHeroButton(),
           ],
         ),
