@@ -15,7 +15,7 @@ class AddHeroButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 30,
+        // top: 30,
         bottom: 10,
         left: 20,
         right: 20,
@@ -36,7 +36,7 @@ class AddHeroButton extends StatelessWidget {
               child: Text(
                 text,
                 style: GoogleFonts.abrilFatface(
-                  fontSize: 40,
+                  fontSize: 25,
                   color: const Color.fromARGB(255, 113, 7, 85),
                 ),
               ),

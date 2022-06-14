@@ -54,11 +54,43 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                     itemCount: snapshot.data?.docs.length,
                     itemBuilder: (context, index) {
-                      return SuperHeroModel(
-                        realName: (documents[index]['real_name']),
-                        nickName: (documents[index]['nick_name']),
-                        avatarImage: (documents[index]['avatar_image']),
-                        quote: (documents[index]['quote']),
+                      return Column(
+                        children: [
+                          SuperHeroModel(
+                            realName: (documents[index]['real_name']),
+                            nickName: (documents[index]['nick_name']),
+                            avatarImage: (documents[index]['avatar_image']),
+                            quote: (documents[index]['quote']),
+                          ),
+                          // delete hero
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  FirebaseFirestore.instance
+                                      .collection('heroes')
+                                      .doc(documents[index].id)
+                                      .delete();
+                                },
+                                icon: const Icon(
+                                  Icons.delete,
+                                  size: 35,
+                                  color: Color.fromARGB(255, 82, 25, 48),
+                                ),
+                              ),
+                              // edit hero
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.edit,
+                                  size: 35,
+                                  color: Color.fromARGB(255, 82, 25, 48),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       );
                     },
                   ),

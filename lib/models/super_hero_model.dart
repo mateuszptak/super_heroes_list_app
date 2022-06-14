@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SuperHeroModel extends StatelessWidget {
+class SuperHeroModel extends StatefulWidget {
   const SuperHeroModel({
     Key? key,
     required this.realName,
@@ -16,6 +16,11 @@ class SuperHeroModel extends StatelessWidget {
   final String quote;
 
   @override
+  State<SuperHeroModel> createState() => _SuperHeroModelState();
+}
+
+class _SuperHeroModelState extends State<SuperHeroModel> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
@@ -27,7 +32,8 @@ class SuperHeroModel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              '$realName:',
+              '${widget.realName}:',
+              textAlign: TextAlign.center,
               style: GoogleFonts.shadowsIntoLight(
                 fontWeight: FontWeight.bold,
                 fontSize: 40,
@@ -36,7 +42,8 @@ class SuperHeroModel extends StatelessWidget {
               ),
             ),
             Text(
-              nickName,
+              widget.nickName,
+              textAlign: TextAlign.center,
               style: GoogleFonts.dancingScript(
                 fontWeight: FontWeight.w900,
                 fontSize: 60,
@@ -49,13 +56,13 @@ class SuperHeroModel extends StatelessWidget {
               radius: 130,
               child: CircleAvatar(
                 radius: 123,
-                backgroundImage: NetworkImage(avatarImage),
+                backgroundImage: NetworkImage(widget.avatarImage),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
               child: Text(
-                quote,
+                widget.quote,
                 maxLines: 3,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
