@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../models/super_hero_model.dart';
 import '../widgets/add_hero_button.dart';
 import 'add_hero_page.dart';
-import 'edit_hero_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,6 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: SafeArea(
@@ -62,40 +62,44 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          SuperHeroModel(
-                            realName: (documents[index]['real_name']),
-                            nickName: (documents[index]['nick_name']),
-                            avatarImage: (documents[index]['avatar_image']),
-                            quote: (documents[index]['quote']),
-                          ),
+                          if (!isKeyboard)
+                            SuperHeroModel(
+                              realName: (documents[index]['real_name']),
+                              nickName: (documents[index]['nick_name']),
+                              avatarImage: (documents[index]['avatar_image']),
+                              quote: (documents[index]['quote']),
+                            ),
                           // delete hero
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              IconButton(
-                                onPressed: () {
-                                  FirebaseFirestore.instance
-                                      .collection('heroes')
-                                      .doc(documents[index].id)
-                                      .delete();
-                                },
-                                icon: const Icon(
-                                  Icons.delete,
-                                  size: 35,
-                                  color: Color.fromARGB(255, 82, 25, 48),
+                              if (!isKeyboard)
+                                IconButton(
+                                  onPressed: () {
+                                    FirebaseFirestore.instance
+                                        .collection('heroes')
+                                        .doc(documents[index].id)
+                                        .delete();
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    size: 35,
+                                    color: Color.fromARGB(255, 82, 25, 48),
+                                  ),
                                 ),
-                              ),
                               // edit hero
-                              IconButton(
-                                onPressed: () {
-                                  editData(context, documents, index);
-                                },
-                                icon: const Icon(
-                                  Icons.edit,
-                                  size: 35,
-                                  color: Color.fromARGB(255, 82, 25, 48),
+
+                              if (!isKeyboard)
+                                IconButton(
+                                  onPressed: () {
+                                    editData(context, documents, index);
+                                  },
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    size: 35,
+                                    color: Color.fromARGB(255, 82, 25, 48),
+                                  ),
                                 ),
-                              ),
                             ],
                           ),
                         ],
@@ -105,16 +109,17 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            AddHeroButton(
-              text: 'Add Super Hero!',
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const AddHeroPage(),
-                  ),
-                );
-              },
-            ),
+            if (!isKeyboard)
+              CustomButton(
+                text: 'Add Super Hero!',
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const AddHeroPage(),
+                    ),
+                  );
+                },
+              ),
           ],
         ),
       ),

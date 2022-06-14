@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AddHeroButton extends StatelessWidget {
-  const AddHeroButton({
+class CustomButton extends StatelessWidget {
+  const CustomButton({
     Key? key,
     required this.text,
     required this.onPressed,

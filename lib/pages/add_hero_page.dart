@@ -40,51 +40,49 @@ class _AddHeroPageState extends State<AddHeroPage> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    AddHeroTextField(
-                      controller: nameTextController,
-                      hintText: 'Name',
-                      onClear: () {
-                        nameTextController.clear();
-                      },
-                    ),
-                    AddHeroTextField(
-                      controller: nickNameTextController,
-                      hintText: 'Nick Name',
-                      onClear: () {
-                        nameTextController.clear();
-                      },
-                    ),
-                    AddHeroTextField(
-                      controller: imageTextController,
-                      hintText: 'Image URL: https:// ... .jpg',
-                      onClear: () {
-                        nameTextController.clear();
-                      },
-                    ),
-                    AddHeroTextField(
-                      controller: quoteTextController,
-                      hintText: 'Quote',
-                      onClear: () {
-                        nameTextController.clear();
-                      },
-                    ),
-                    AddHeroButton(
-                      onPressed: () {
-                        FirebaseFirestore.instance.collection('heroes').add({
-                          'real_name': nameTextController.text,
-                          'nick_name': nickNameTextController.text,
-                          'avatar_image': imageTextController.text,
-                          'quote': quoteTextController.text,
-                        });
-                        Navigator.of(context).pop();
-                      },
-                      text: 'Add Hero',
-                    ),
-                  ],
-                ),
+              child: Column(
+                children: [
+                  AddHeroTextField(
+                    controller: nameTextController,
+                    hintText: 'Name',
+                    onClear: () {
+                      nameTextController.clear();
+                    },
+                  ),
+                  AddHeroTextField(
+                    controller: nickNameTextController,
+                    hintText: 'Nick Name',
+                    onClear: () {
+                      nameTextController.clear();
+                    },
+                  ),
+                  AddHeroTextField(
+                    controller: imageTextController,
+                    hintText: 'Image URL: https:// ... .jpg',
+                    onClear: () {
+                      nameTextController.clear();
+                    },
+                  ),
+                  AddHeroTextField(
+                    controller: quoteTextController,
+                    hintText: 'Quote',
+                    onClear: () {
+                      nameTextController.clear();
+                    },
+                  ),
+                  CustomButton(
+                    onPressed: () {
+                      FirebaseFirestore.instance.collection('heroes').add({
+                        'real_name': nameTextController.text,
+                        'nick_name': nickNameTextController.text,
+                        'avatar_image': imageTextController.text,
+                        'quote': quoteTextController.text,
+                      });
+                      Navigator.of(context).pop();
+                    },
+                    text: 'Add Hero',
+                  ),
+                ],
               ),
             ),
           ],
