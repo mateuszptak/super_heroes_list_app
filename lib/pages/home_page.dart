@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../models/super_hero_model.dart';
 import '../widgets/add_hero_button.dart';
 import 'add_hero_page.dart';
+import 'edit_hero_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,6 +15,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final nameTextController = TextEditingController();
+  final nickNameTextController = TextEditingController();
+  final imageTextController = TextEditingController();
+  final quoteTextController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +87,9 @@ class _HomePageState extends State<HomePage> {
                               ),
                               // edit hero
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  editData(context, documents, index);
+                                },
                                 icon: const Icon(
                                   Icons.edit,
                                   size: 35,
@@ -110,6 +118,62 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<dynamic> editData(BuildContext context,
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> documents, int index) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          actions: [
+            TextField(
+              controller: nameTextController,
+              decoration: const InputDecoration(
+                labelText: 'Name',
+              ),
+            ),
+            TextField(
+              controller: nickNameTextController,
+              decoration: const InputDecoration(
+                labelText: 'Nick name',
+              ),
+            ),
+            TextField(
+              controller: imageTextController,
+              decoration: const InputDecoration(
+                labelText: 'Image URL',
+              ),
+            ),
+            TextField(
+              controller: quoteTextController,
+              decoration: const InputDecoration(
+                labelText: 'Quote',
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                FirebaseFirestore.instance
+                    .collection('heroes')
+                    .doc(documents[index].id)
+                    .update({
+                  'real_name': nameTextController.text,
+                  'nick_name': nickNameTextController.text,
+                  'avatar_image': imageTextController.text,
+                  'quote': quoteTextController.text,
+                });
+                nameTextController.clear();
+                nickNameTextController.clear();
+                quoteTextController.clear();
+                imageTextController.clear();
+                Navigator.of(context).pop();
+              },
+              child: const Text('Update your data'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
