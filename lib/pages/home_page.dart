@@ -157,24 +157,39 @@ class _HomePageState extends State<HomePage> {
                 labelText: 'Quote',
               ),
             ),
-            TextButton(
-              onPressed: () {
-                FirebaseFirestore.instance
-                    .collection('heroes')
-                    .doc(documents[index].id)
-                    .update({
-                  'real_name': nameTextController.text,
-                  'nick_name': nickNameTextController.text,
-                  'avatar_image': imageTextController.text,
-                  'quote': quoteTextController.text,
-                });
-                nameTextController.clear();
-                nickNameTextController.clear();
-                quoteTextController.clear();
-                imageTextController.clear();
-                Navigator.of(context).pop();
-              },
-              child: const Text('Update your data'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    nameTextController.clear();
+                    nickNameTextController.clear();
+                    quoteTextController.clear();
+                    imageTextController.clear();
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    FirebaseFirestore.instance
+                        .collection('heroes')
+                        .doc(documents[index].id)
+                        .update({
+                      'real_name': nameTextController.text,
+                      'nick_name': nickNameTextController.text,
+                      'avatar_image': imageTextController.text,
+                      'quote': quoteTextController.text,
+                    });
+                    nameTextController.clear();
+                    nickNameTextController.clear();
+                    quoteTextController.clear();
+                    imageTextController.clear();
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Update your data'),
+                ),
+              ],
             ),
           ],
         );
